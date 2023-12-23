@@ -72,5 +72,3 @@ function reiniciar(){
     listaAmigos = [];
     botaoSortear.classList.add("disable");
 }
-
-//Falta um detalhe: se eu clicar em adicionar e o input estiver vazio, ele adiciona um "nome vazio"
