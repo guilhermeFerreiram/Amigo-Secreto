@@ -3,15 +3,38 @@ let listaDeIndicesGerados = [];
 let listaSorteio = [];
 let listaStr = document.getElementById("lista-sorteio");
 let listaAmg = document.getElementById("lista-amigos");
+let botaoSortear = document.getElementById("botao-sortear");
+let numeroMinimoParticipantes = 4;
 
 function adicionar(){
+
     let nomeAmigo = document.getElementById("nome-amigo");
-    listaAmigos.push(" " + nomeAmigo.value);
+
+    if (nomeAmigo.value === ""){
+        alert("Insira um nome");
+        return;
+    }
+
+    if (listaAmigos.includes(nomeAmigo.value.trim())){
+        alert("Evite colocar nomes repetidos, tente colocar o sobronome se precisar");
+        return;
+    }
+
+    listaAmigos.push(nomeAmigo.value);
     listaAmg.textContent = listaAmigos;
     nomeAmigo.value = "";
+
+    if (listaAmigos.length >= numeroMinimoParticipantes){
+        botaoSortear.classList.remove("disable");
+    }
 }
 
 function sortear(){
+
+    if (listaAmigos.length < numeroMinimoParticipantes) {
+        alert(`Adicione pelo menos ${numeroMinimoParticipantes} amigos`);
+        return;
+    }
 
     listaStr.textContent = "";
     listaSorteio = [];
@@ -41,13 +64,13 @@ function embaralha(lista){
             listaDeIndicesGerados.push(indiceAleatorio);
         }
     }
-
 }
 
 function reiniciar(){
     listaStr.textContent = "";
     listaAmg.textContent = "";
     listaAmigos = [];
+    botaoSortear.classList.add("disable");
 }
 
 //Falta um detalhe: se eu clicar em adicionar e o input estiver vazio, ele adiciona um "nome vazio"
